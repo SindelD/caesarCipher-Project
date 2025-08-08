@@ -1,0 +1,29 @@
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n").lower()
+text = input("Type your message:\n").lower()
+shift = int(input("Type the shift number:\n"))
+
+def encrypt(original_text, shift_amount):
+    encode_text = ""
+    #for every value in string, move to the right, start from beginning if end is reached
+    for index_ in range(0, len(original_text)):
+        if alphabet.index(original_text[index_]) + shift_amount <= 24:
+            encode_text = encode_text + alphabet[alphabet.index(original_text[index_]) + shift_amount]
+        else:
+            encode_text = encode_text + alphabet[abs(len(alphabet) - alphabet.index(original_text[index_]) - shift_amount)]
+    print(f"The encoded text is {encode_text}")
+
+def decrypt(original_text, shift_amount):
+    dec_text = ""
+    for index_ in range(0, len(original_text)):
+        dec_text = dec_text + alphabet[alphabet.index(original_text[index_]) - shift_amount]
+    print(f"The decoded text is {dec_text}")
+
+def caesar(chosen_direction):
+    if chosen_direction == "encode":
+        encrypt(text, shift)
+    if chosen_direction == "decode":
+        decrypt(text, shift)
+
+caesar(direction)
